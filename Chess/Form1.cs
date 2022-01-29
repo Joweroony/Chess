@@ -36,7 +36,7 @@ namespace Chess
         {
             InitializeComponent();
 
-            chessSprites = new Bitmap("C:\\Users\\Kebaru\\Downloads\\chess.png");
+            chessSprites = new Bitmap(Chess.Properties.Resources.Chess);
 
             //button1.BackgroundImage = part;
 
