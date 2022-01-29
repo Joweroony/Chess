@@ -187,53 +187,54 @@ namespace Chess
             }
         }
 
-        public void ShowSteps(int IcurrFigure, int JCurrFigure, int currFigure)
+        public void ShowSteps(int IcurrFigure, int JcurrFigure, int currFigure)
         {
             int dir = currPlayer == 1 ? 1 : -1;
             switch (currFigure % 10)
             {
                 case 6:
-                    if (InsideBorder(IcurrFigure + 1 * dir, JCurrFigure))
+                    if (InsideBorder(IcurrFigure + 1 * dir, JcurrFigure))
                     {
-                        if (map[IcurrFigure + 1 * dir, JCurrFigure] == 0)
+                        if (map[IcurrFigure + 1 * dir, JcurrFigure] == 0)
                         {
-                            butts[IcurrFigure + 1 * dir, JCurrFigure].BackColor = Color.Yellow;
-                            butts[IcurrFigure + 1 * dir, JCurrFigure].Enabled = true;
-                            if (InsideBorder(IcurrFigure + 2 * dir, JCurrFigure))
-                            {
-                                if (map[IcurrFigure + 2 * dir, JCurrFigure] == 0)
-                                {
-                                    butts[IcurrFigure + 1 * dir, JCurrFigure].BackColor = Color.Yellow;
-                                    butts[IcurrFigure + 1 * dir, JCurrFigure].Enabled = true;
-                                }
-                            }
+                            butts[IcurrFigure + 1 * dir, JcurrFigure].BackColor = Color.Yellow;
+                            butts[IcurrFigure + 1 * dir, JcurrFigure].Enabled = true;
                         }
                     }
-                    if (InsideBorder(IcurrFigure + 1 * dir, JCurrFigure + 1))
+
+                    if (InsideBorder(IcurrFigure + 1 * dir, JcurrFigure + 1))
                     {
-                        if (map[IcurrFigure + 1 * dir, JCurrFigure + 1] != 0 && map[IcurrFigure + 1 * dir, JCurrFigure + 1] / 10 != currPlayer)
+                        if (map[IcurrFigure + 1 * dir, JcurrFigure + 1] != 0 && map[IcurrFigure + 1 * dir, JcurrFigure + 1] / 10 != currPlayer)
                         {
-                            butts[IcurrFigure + 1 * dir, JCurrFigure - 1].BackColor = Color.Yellow;
-                            butts[IcurrFigure + 1 * dir, JCurrFigure - 1].Enabled = true;
+                            butts[IcurrFigure + 1 * dir, JcurrFigure + 1].BackColor = Color.Yellow;
+                            butts[IcurrFigure + 1 * dir, JcurrFigure + 1].Enabled = true;
+                        }
+                    }
+                    if (InsideBorder(IcurrFigure + 1 * dir, JcurrFigure - 1))
+                    {
+                        if (map[IcurrFigure + 1 * dir, JcurrFigure - 1] != 0 && map[IcurrFigure + 1 * dir, JcurrFigure - 1] / 10 != currPlayer)
+                        {
+                            butts[IcurrFigure + 1 * dir, JcurrFigure - 1].BackColor = Color.Yellow;
+                            butts[IcurrFigure + 1 * dir, JcurrFigure - 1].Enabled = true;
                         }
                     }
                     break;
                 case 5:
-                    ShowVerticalHorizontal(IcurrFigure, JCurrFigure);
+                    ShowVerticalHorizontal(IcurrFigure, JcurrFigure);
                     break;
                 case 3:
-                    ShowDiagonal(IcurrFigure, JCurrFigure);
+                    ShowDiagonal(IcurrFigure, JcurrFigure);
                     break;
                 case 2:
-                    ShowVerticalHorizontal(IcurrFigure, JCurrFigure);
-                    ShowDiagonal(IcurrFigure, JCurrFigure);
+                    ShowVerticalHorizontal(IcurrFigure, JcurrFigure);
+                    ShowDiagonal(IcurrFigure, JcurrFigure);
                     break;
                 case 1:
-                    ShowVerticalHorizontal(IcurrFigure, JCurrFigure, true);
-                    ShowDiagonal(IcurrFigure, JCurrFigure, true);
+                    ShowVerticalHorizontal(IcurrFigure, JcurrFigure, true);
+                    ShowDiagonal(IcurrFigure, JcurrFigure, true);
                     break;
                 case 4:
-                    ShowHorseSteps(IcurrFigure, JCurrFigure);
+                    ShowHorseSteps(IcurrFigure, JcurrFigure);
                     break;
             }
         }
@@ -247,14 +248,14 @@ namespace Chess
 
         public bool DeterminePath(int IcurrFigure, int j)
         {
-            if (map[IcurrFigure,j]==0)
+            if (map[IcurrFigure, j] == 0)
             {
                 butts[IcurrFigure, j].BackColor = Color.Yellow;
                 butts[IcurrFigure, j].Enabled = true;
             }
             else
             {
-                if (map[IcurrFigure,j]/10!=currPlayer)
+                if (map[IcurrFigure, j] / 10 != currPlayer)
                 {
                     butts[IcurrFigure, j].BackColor = Color.Yellow;
                     butts[IcurrFigure, j].Enabled = true;
@@ -276,7 +277,7 @@ namespace Chess
                 if (isOneStep)
                     break;
             }
-            for (int i = IcurrFigure - 1; i >=0; i--)
+            for (int i = IcurrFigure - 1; i >= 0; i--)
             {
                 if (InsideBorder(i, JcurrFigure))
                 {
@@ -288,7 +289,7 @@ namespace Chess
             }
             for (int j = JcurrFigure + 1; j < 8; j++)
             {
-                if (InsideBorder(IcurrFigure,j ))
+                if (InsideBorder(IcurrFigure, j))
                 {
                     if (!DeterminePath(IcurrFigure, j))
                         break;
@@ -296,7 +297,7 @@ namespace Chess
                 if (isOneStep)
                     break;
             }
-            for (int j = JcurrFigure - 1; j >=0 ; j-- )
+            for (int j = JcurrFigure - 1; j >= 0; j--)
             {
                 if (InsideBorder(IcurrFigure, j))
                 {
@@ -311,7 +312,7 @@ namespace Chess
         public void ShowDiagonal(int IcurrFigure, int JcurrFigure, bool isOneStep = false)
         {
             int j = JcurrFigure + 1;
-            for(int i= IcurrFigure-1;i>=0;i--)
+            for (int i = IcurrFigure - 1; i >= 0; i--)
             {
                 if (InsideBorder(i, j))
                 {
@@ -359,7 +360,7 @@ namespace Chess
             }
 
             j = JcurrFigure + 1;
-            for (int i = IcurrFigure + 1; i <8; i++)
+            for (int i = IcurrFigure + 1; i < 8; i++)
             {
                 if (InsideBorder(i, j))
                 {
